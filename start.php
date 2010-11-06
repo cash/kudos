@@ -14,6 +14,8 @@ function kudos_init() {
 	// profile/menu/links to give this to all users
 	elgg_extend_view('profile/menu/adminlinks', 'kudos/user_hover_menu');
 
+	register_extender_url_handler('kudos_url', 'annotation', 'kudos');
+
 	$action_path = "{$CONFIG->pluginspath}kudos/actions";
 	register_action('kudos/add', FALSE, "$action_path/add.php", TRUE);
 	register_action('kudos/delete', FALSE, "$action_path/delete.php", TRUE);
@@ -60,4 +62,9 @@ function kudos_sidebar_menu() {
 		add_submenu_item(elgg_echo('kudos:your:title'), "{$base}pg/kudos/user/{$user->username}/");
 	}
 	add_submenu_item(elgg_echo('kudos:all:title'), "{$base}pg/kudos/all/");
+}
+
+function kudos_url($annotation) {
+	global $CONFIG;
+	return "{$CONFIG->wwwroot}pg/kudos/view/{$annotation->id}";
 }
