@@ -17,6 +17,8 @@ function kudos_init() {
 
 function kudos_page_handler($page) {
 
+	kudos_sidebar_menu();
+	
 	switch ($page[0]) {
 		case "add":
 			$user = get_user_by_username($page[1]);
@@ -38,4 +40,14 @@ function kudos_page_handler($page) {
 	$content = elgg_view_title($title) . $content;
 	$body = elgg_view_layout('two_column_left_sidebar', '', $content);
 	page_draw($title, $body);
+}
+
+function kudos_sidebar_menu() {
+	global $CONFIG;
+	$base = $CONFIG->wwwroot;
+	if (isloggedin()) {
+		$user = get_loggedin_user();
+		add_submenu_item(elgg_echo('kudos:your:title'), "{$base}pg/kudos/user/{$user->username}/");
+	}
+	add_submenu_item(elgg_echo('kudos:all:title'), "{$base}pg/kudos/all/");
 }
