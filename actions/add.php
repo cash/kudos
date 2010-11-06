@@ -13,8 +13,8 @@ if (!$user) {
 $result = $user->annotate('kudos', $reason, ACCESS_PUBLIC);
 
 $subject = sprintf(elgg_echo('kudos:subject'), $CONFIG->site->name);
-$message = sprintf(elgg_echo('kudos:body'), $reason);
-notify_user($user->guid, get_loggedin_userid(), $subject, $message, null);
+$message = sprintf(elgg_echo('kudos:body'), $reason, $CONFIG->site->name);
+notify_user($user->guid, get_loggedin_userid(), $subject, $message);
 
 add_to_river('river/annotation/kudos/create', 'create', $user->guid, get_loggedin_userid(), ACCESS_PUBLIC, 0, $result);
 
