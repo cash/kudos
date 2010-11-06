@@ -3,13 +3,17 @@
 register_elgg_event_handler('init', 'system', 'kudos_init');
 
 function kudos_init() {
+	global $CONFIG;
+
+	add_menu(elgg_echo('kudos'), "{$CONFIG->wwwroot}pg/kudos/all/");
 
 	register_page_handler('kudos', 'kudos_page_handler');
 
 	elgg_extend_view('css', 'kudos/css');
-	elgg_extend_view('profile/menu/links', 'kudos/user_hover_menu');
 
-	global $CONFIG;
+	// profile/menu/links to give this to all users
+	elgg_extend_view('profile/menu/adminlinks', 'kudos/user_hover_menu');
+
 	$action_path = "{$CONFIG->pluginspath}kudos/actions";
 	register_action('kudos/add', FALSE, "$action_path/add.php", TRUE);
 	register_action('kudos/delete', FALSE, "$action_path/delete.php", TRUE);
@@ -34,6 +38,12 @@ function kudos_page_handler($page) {
 		case "all":
 			$title = elgg_echo('kudos:all:title');
 			$content = elgg_view('kudos/all');
+			break;
+		case "view":
+			$kudos = get_annotation($page[1]);
+			$user = get_user($kudos->entity_guid);
+			$title = sprintf(elgg_echo('kudos:view:title'), $user->name);
+			$content = elgg_view('kudos/view', array('kudos' => $kudos));
 			break;
 	}
 

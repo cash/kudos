@@ -1,15 +1,18 @@
 <?php
 
 $english = array(
+	'kudos' => 'Kudos',
 	'kudos:hover:menu' => 'Give kudos',
 	'kudos:add:title' => "Give %s a kudos",
 	'kudos:user:title' => "%s's kudos",
 	'kudos:your:title' => 'Your kudos',
 	'kudos:all:title' => 'All kudos',
+	'kudos:view:title' => 'A kudos for %s',
 
 	'kudos:given' => 'Given',
 	'kudos:reason' => 'Reason',
 	'kudos:none' => 'No kudos',
+	'kudos:more' => 'See more kudos',
 
 	'kudos:add:success' => '%s\'s kudos saved',
 	'kudos:add:failure' => 'Kudos failure',

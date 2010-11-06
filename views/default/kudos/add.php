@@ -1,6 +1,3 @@
-<?php
-
-?>
 <div class="contentWrapper">
 <?php
 	$body = elgg_view('kudos/forms/add', $vars);
